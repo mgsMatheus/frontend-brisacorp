@@ -1,0 +1,30 @@
+<div class="bc-toolbar">
+  <mat-toolbar>
+    <div class="toolbar">
+      <div class="logo">
+        <img class="image" src="../../../../assets/images/logo-v2.png" alt="" />
+      </div>
+      <div class="profile">
+        <button class="button" mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon class="icon material-icons-outlined"
+            >account_circle</mat-icon
+          >
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button>
+          <button mat-menu-item disabled>
+            <mat-icon>voicemail</mat-icon>
+            <span>Check voice mail</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Disable alerts</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-toolbar>
+</div>
