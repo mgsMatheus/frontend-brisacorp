@@ -1,0 +1,90 @@
+<div class="register-user">
+  <bc-base-page [isRegister]="true"></bc-base-page>
+  <div class="cards">
+    <mat-card class="card">
+      <mat-card-header class="header">
+        <mat-card-title>Crie sua conta</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <form [formGroup]="form" class="form">
+          <div>
+            <mat-form-field class="input">
+              <mat-label>Nome</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="name"
+                placeholder="Ex. Danilo Junior" />
+              @if (form.controls['name'].hasError('required')) {
+              <mat-error>Nome é obrigatorio</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="input-second" *ngIf="urlPath === 'patient'">
+              <mat-label>CPF</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="cpf"
+                placeholder="Ex. 044.530.510-00" />
+              @if (form.controls['cpf'].hasError('required')) {
+              <mat-error>CPF é obrigatorio</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="input-second" *ngIf="urlPath === 'hospital'">
+              <mat-label>CNPJ</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="cnpj"
+                placeholder="Ex. 66.049.311/0001-53" />
+              @if (form.controls['cnpj'].hasError('required')) {
+              <mat-error>CNPJ é obrigatorio</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="input">
+              <mat-label>Email</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="emailUser"
+                placeholder="Ex. pat@example.com" />
+              @if (form.controls['emailUser'].hasError('email') &&
+              !form.controls['emailUser'].hasError('required')) {
+              <mat-error>Por favor digite um email valido</mat-error>
+              } @if (form.controls['emailUser'].hasError('required')) {
+              <mat-error>Email é obrigatorio</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="input-second">
+              <mat-label>Telefone</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="phone"
+                placeholder="Ex. 11 98629-9829" />
+              @if (form.controls['phone'].hasError('required')) {
+              <mat-error>Telefone é obrigatorio</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <mat-form-field class="input">
+            <mat-label>Senha</mat-label>
+            <input type="text" matInput formControlName="password" />
+            @if (form.controls['password'].hasError('required')) {
+            <mat-error>Senha é obrigatorio</mat-error>
+            }
+          </mat-form-field>
+        </form>
+        <button
+          class="button-register"
+          mat-raised-button
+          color="primary"
+          (click)="register()">
+          Cadastrar
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+::ng-deep {
+  .home-no-guard {
+    .mat-mdc-raised-button {
+      background: #026272 !important;
+    }
+    .mat-mdc-outlined-button {
+      color: #026272 !important;
+      border-color: #026272 !important;
+    }
+    .register {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      .button-register {
+        margin-right: 35px;
+        width: 200px;
+        height: 50px;
+      }
+    }
+  }
+}

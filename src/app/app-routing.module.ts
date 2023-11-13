@@ -1,16 +1,21 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full',
+    path: "",
+    redirectTo: "/home",
+    pathMatch: "full",
   },
   {
-    path: 'home',
+    path: "home",
     loadChildren: () =>
-      import('./pages/home/home.module').then((m) => m.HomeModule),
+      import("./pages/home/home.module").then((m) => m.HomeModule),
+  },
+  {
+    path: "register",
+    loadChildren: () =>
+      import("./pages/register/register.module").then((m) => m.RegisterModule),
   },
 ];
 

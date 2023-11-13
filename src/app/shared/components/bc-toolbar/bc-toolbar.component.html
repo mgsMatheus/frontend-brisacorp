@@ -1,10 +1,10 @@
 <div class="bc-toolbar">
   <mat-toolbar>
-    <div class="toolbar">
+    <div [ngClass]="isRegister === false ? 'toolbar' : 'register'">
       <div class="logo">
         <img class="image" src="../../../../assets/images/logo-v2.png" alt="" />
       </div>
-      <div class="profile">
+      <div class="profile" *ngIf="isRegister === false">
         <button class="button" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon class="icon material-icons-outlined"
             >account_circle</mat-icon

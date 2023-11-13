@@ -1,0 +1,55 @@
+.register-user {
+  height: 100%;
+  width: 100%;
+  .mat-mdc-raised-button {
+    background: #026272 !important;
+  }
+  .cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 80%;
+
+    .card {
+      display: flex;
+      align-items: center;
+      width: 750px;
+      height: 600px;
+      border: 1px solid #dcdcdc;
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 45px;
+      }
+      .content {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .form {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          .input {
+            margin-bottom: 30px;
+            margin-right: 30px;
+            width: 300px;
+          }
+          .input-second {
+            margin-bottom: 30px;
+            width: 300px;
+          }
+        }
+        .button-register {
+          margin-top: 75px;
+          width: 200px;
+          height: 50px;
+        }
+      }
+    }
+  }
+}
