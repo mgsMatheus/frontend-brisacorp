@@ -1,7 +1,7 @@
 .register-user {
   height: 100%;
   width: 100%;
-  .mat-mdc-raised-button {
+  .mat-mdc-raised-button:not(:disabled) {
     background: #026272 !important;
   }
   .cards {
@@ -43,13 +43,61 @@
             margin-bottom: 30px;
             width: 300px;
           }
+          .mat-mdc-form-field-hint {
+            color: red;
+          }
         }
         .button-register {
-          margin-top: 75px;
           width: 200px;
           height: 50px;
         }
       }
+    }
+  }
+}
+
+::ng-deep {
+  .mdc-snackbar__surface {
+    background: #026272 !important;
+  }
+  .mat-mdc-snack-bar-container
+    .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+    color: white !important;
+  }
+  .erro-input {
+    .mdc-line-ripple::after {
+      border-bottom-color: red !important;
+    }
+    .mdc-line-ripple::before {
+      border-bottom-color: red !important;
+    }
+    .mdc-floating-label {
+      color: red !important;
+    }
+    .mdc-text-field--filled:not(.mdc-text-field--disabled)
+      .mdc-text-field__input {
+      caret-color: red;
+    }
+    .icon {
+      color: red;
+    }
+  }
+  .valid-input {
+    .mdc-line-ripple::after {
+      border-bottom-color: #026272 !important;
+    }
+    .mdc-line-ripple::before {
+      border-bottom-color: #026272 !important;
+    }
+    .mdc-floating-label {
+      color: #026272 !important;
+    }
+    .mdc-text-field--filled:not(.mdc-text-field--disabled)
+      .mdc-text-field__input {
+      caret-color: #026272;
+    }
+    .icon {
+      color: #026272;
     }
   }
 }

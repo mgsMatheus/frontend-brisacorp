@@ -8,7 +8,13 @@
       <mat-card-content class="content">
         <form [formGroup]="form" class="form">
           <div>
-            <mat-form-field class="input">
+            <mat-form-field
+              [ngClass]="
+                form.controls['name'].errors !== null
+                  ? 'erro-input'
+                  : 'valid-input'
+              "
+              class="input">
               <mat-label>Nome</mat-label>
               <input
                 type="text"
@@ -16,34 +22,63 @@
                 formControlName="name"
                 placeholder="Ex. Danilo Junior" />
               @if (form.controls['name'].hasError('required')) {
-              <mat-error>Nome é obrigatorio</mat-error>
+              <mat-hint>Nome é obrigatorio</mat-hint>
               }
             </mat-form-field>
-            <mat-form-field class="input-second" *ngIf="urlPath === 'patient'">
+            <mat-form-field
+              [ngClass]="
+                form.controls['cpf'].errors !== null
+                  ? 'erro-input'
+                  : 'valid-input'
+              "
+              class="input-second"
+              *ngIf="urlPath === 'patient'">
               <mat-label>CPF</mat-label>
               <input
                 type="text"
                 matInput
                 formControlName="cpf"
+                BcMask="000.000.000-00"
+                BcType="number"
                 placeholder="Ex. 044.530.510-00" />
               @if (form.controls['cpf'].hasError('required')) {
-              <mat-error>CPF é obrigatorio</mat-error>
+              <mat-hint>CPF é obrigatorio</mat-hint>
+              } @if (form.controls['cpf'].hasError('cpfInvalid') &&
+              !form.controls['cpf'].hasError('required')) {
+              <mat-hint>CPF invalido</mat-hint>
               }
             </mat-form-field>
-            <mat-form-field class="input-second" *ngIf="urlPath === 'hospital'">
+            <mat-form-field
+              [ngClass]="
+                form.controls['cnpj'].errors !== null
+                  ? 'erro-input'
+                  : 'valid-input'
+              "
+              class="input-second"
+              *ngIf="urlPath === 'hospital'">
               <mat-label>CNPJ</mat-label>
               <input
                 type="text"
                 matInput
                 formControlName="cnpj"
+                BcMask="00.000.000/0000-00"
+                BcType="number"
                 placeholder="Ex. 66.049.311/0001-53" />
               @if (form.controls['cnpj'].hasError('required')) {
-              <mat-error>CNPJ é obrigatorio</mat-error>
+              <mat-hint>CNPJ é obrigatorio</mat-hint>
+              }@if (form.controls['cnpj'].hasError('minlength')) {
+              <mat-hint>CNPJ invalido</mat-hint>
               }
             </mat-form-field>
           </div>
           <div>
-            <mat-form-field class="input">
+            <mat-form-field
+              class="input"
+              [ngClass]="
+                form.controls['emailUser'].errors !== null
+                  ? 'erro-input'
+                  : 'valid-input'
+              ">
               <mat-label>Email</mat-label>
               <input
                 type="email"
@@ -52,28 +87,99 @@
                 placeholder="Ex. pat@example.com" />
               @if (form.controls['emailUser'].hasError('email') &&
               !form.controls['emailUser'].hasError('required')) {
-              <mat-error>Por favor digite um email valido</mat-error>
+              <mat-hint>Por favor digite um email valido</mat-hint>
               } @if (form.controls['emailUser'].hasError('required')) {
-              <mat-error>Email é obrigatorio</mat-error>
+              <mat-hint>Email é obrigatorio</mat-hint>
               }
             </mat-form-field>
-            <mat-form-field class="input-second">
+            <mat-form-field
+              class="input-second"
+              [ngClass]="
+                form.controls['phone'].errors !== null
+                  ? 'erro-input'
+                  : 'valid-input'
+              ">
               <mat-label>Telefone</mat-label>
               <input
                 type="text"
                 matInput
                 formControlName="phone"
+                BcMask="00 00000-0000"
+                BcType="number"
                 placeholder="Ex. 11 98629-9829" />
               @if (form.controls['phone'].hasError('required')) {
-              <mat-error>Telefone é obrigatorio</mat-error>
+              <mat-hint>Telefone é obrigatorio</mat-hint>
+              }@if (form.controls['phone'].hasError('minlength')) {
+              <mat-hint>Telefone invalido</mat-hint>
               }
             </mat-form-field>
           </div>
-          <mat-form-field class="input">
+          <mat-form-field
+            class="input"
+            [ngClass]="
+              form.controls['password'].errors !== null
+                ? 'erro-input'
+                : 'valid-input'
+            ">
             <mat-label>Senha</mat-label>
-            <input type="text" matInput formControlName="password" />
+            <input [type]="typePassword" matInput formControlName="password" />
             @if (form.controls['password'].hasError('required')) {
-            <mat-error>Senha é obrigatorio</mat-error>
+            <mat-hint>Senha é obrigatorio</mat-hint>
+            }@if (form.controls['password'].hasError('password') &&
+            !form.controls['password'].hasError('required')) {
+            <mat-hint>Senha é fraca</mat-hint>
+            } @if(typePassword === "text") {
+            <button
+              matSuffix
+              mat-icon-button
+              (click)="typePassword = 'password'">
+              <mat-icon class="icon material-icons-outlined"
+                >visibility_off</mat-icon
+              >
+            </button>
+            } @if(typePassword === "password") {
+            <button matSuffix mat-icon-button (click)="typePassword = 'text'">
+              <mat-icon class="icon material-icons-outlined"
+                >visibility</mat-icon
+              >
+            </button>
+            }
+          </mat-form-field>
+          <mat-form-field
+            class="input"
+            [ngClass]="
+              form.controls['passwordConfirm'].errors !== null
+                ? 'erro-input'
+                : 'valid-input'
+            ">
+            <mat-label>Confirme a senha</mat-label>
+            <input
+              [type]="typeCofirmPassword"
+              matInput
+              formControlName="passwordConfirm" />
+            @if (form.controls['passwordConfirm'].hasError('required')) {
+            <mat-hint>Cofirmar a senha é obrigatorio</mat-hint>
+            } @if (form.controls['passwordConfirm'].hasError('passwordNotEqual')
+            && !form.controls['passwordConfirm'].hasError('required')) {
+            <mat-hint>Senhas sao diferentes </mat-hint>
+            } @if(typeCofirmPassword === "text") {
+            <button
+              matSuffix
+              mat-icon-button
+              (click)="typeCofirmPassword = 'password'">
+              <mat-icon class="icon material-icons-outlined"
+                >visibility_off</mat-icon
+              >
+            </button>
+            } @if(typeCofirmPassword === "password") {
+            <button
+              matSuffix
+              mat-icon-button
+              (click)="typeCofirmPassword = 'text'">
+              <mat-icon class="icon material-icons-outlined"
+                >visibility</mat-icon
+              >
+            </button>
             }
           </mat-form-field>
         </form>
@@ -81,6 +187,7 @@
           class="button-register"
           mat-raised-button
           color="primary"
+          [disabled]="form.invalid"
           (click)="register()">
           Cadastrar
         </button>

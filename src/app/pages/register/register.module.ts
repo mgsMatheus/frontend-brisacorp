@@ -10,6 +10,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { CreateUseService } from "../../core/service/user/create-user.service";
+import { BcInputsDirectiveModule } from "../../shared/directives/bc-inputs-directive/bc-inputs-directive.module";
+import { MatIconModule } from "@angular/material/icon";
+import { BcSnackbarModule } from "../../shared/components/bc-snackbar/bc-snackbar.module";
 @NgModule({
   declarations: [RegisterComponent, RegisterUserComponent],
   imports: [
@@ -22,6 +25,9 @@ import { CreateUseService } from "../../core/service/user/create-user.service";
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    BcInputsDirectiveModule,
+    MatIconModule,
+    BcSnackbarModule,
   ],
   exports: [RegisterComponent, RegisterUserComponent],
   providers: [CreateUseService],

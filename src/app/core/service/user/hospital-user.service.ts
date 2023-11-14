@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
-import { PatientModel } from "../../models/users/patient.model";
 import { UseCase } from "../../base/use-case";
 import { UserRepository } from "../../repositories/user/user.repository";
 import { Observable } from "rxjs";
+import { HospitalModel } from "../../models/users/hospital.model";
 
 @Injectable({
   providedIn: "root",
 })
-export class CreateUseService implements UseCase<PatientModel> {
+export class CreateHospitalService implements UseCase<HospitalModel> {
   constructor(private userRespository: UserRepository) {}
-  execute(patient: PatientModel): Observable<PatientModel> {
-    return this.userRespository.createRegisterPatient(patient);
+  execute(hospital: HospitalModel): Observable<HospitalModel> {
+    return this.userRespository.createRegisterHospital(hospital);
   }
 }
