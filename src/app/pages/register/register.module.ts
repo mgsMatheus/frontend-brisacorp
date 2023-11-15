@@ -13,6 +13,8 @@ import { CreateUseService } from "../../core/service/user/create-user.service";
 import { BcInputsDirectiveModule } from "../../shared/directives/bc-inputs-directive/bc-inputs-directive.module";
 import { MatIconModule } from "@angular/material/icon";
 import { BcSnackbarModule } from "../../shared/components/bc-snackbar/bc-snackbar.module";
+import { BcLoadingModule } from "../../shared/components/bc-loading/bc-loading.module";
+
 @NgModule({
   declarations: [RegisterComponent, RegisterUserComponent],
   imports: [
@@ -28,6 +30,7 @@ import { BcSnackbarModule } from "../../shared/components/bc-snackbar/bc-snackba
     BcInputsDirectiveModule,
     MatIconModule,
     BcSnackbarModule,
+    BcLoadingModule,
   ],
   exports: [RegisterComponent, RegisterUserComponent],
   providers: [CreateUseService],

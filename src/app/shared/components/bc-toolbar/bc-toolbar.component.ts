@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "bc-toolbar",
@@ -7,4 +8,11 @@ import { Component, Input } from "@angular/core";
 })
 export class BcToolbarComponent {
   @Input() isRegister = false;
+  @Input() isHome = false;
+
+  constructor(private router: Router) {}
+
+  toRedirect() {
+    this.router.navigate(["login"]);
+  }
 }

@@ -4,7 +4,7 @@
       <div class="logo">
         <img class="image" src="../../../../assets/images/logo-v2.png" alt="" />
       </div>
-      <div class="profile" *ngIf="isRegister === false">
+      <div class="profile" *ngIf="isRegister === false && isHome === false">
         <button class="button" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon class="icon material-icons-outlined"
             >account_circle</mat-icon
@@ -13,17 +13,20 @@
         <mat-menu #menu="matMenu">
           <button mat-menu-item>
             <mat-icon>dialpad</mat-icon>
-            <span>Redial</span>
-          </button>
-          <button mat-menu-item disabled>
-            <mat-icon>voicemail</mat-icon>
-            <span>Check voice mail</span>
+            <span>Iniciar sessao</span>
           </button>
           <button mat-menu-item>
             <mat-icon>notifications_off</mat-icon>
-            <span>Disable alerts</span>
+            <span>Cadastra-se</span>
           </button>
         </mat-menu>
+      </div>
+      <div class="profile" *ngIf="isRegister === false && isHome === true">
+        <button class="button" mat-icon-button (click)="toRedirect()">
+          <mat-icon class="icon material-icons-outlined"
+            >account_circle</mat-icon
+          >
+        </button>
       </div>
     </div>
   </mat-toolbar>

@@ -1,7 +1,6 @@
 import { Component, OnInit, forwardRef } from "@angular/core";
 import {
   AbstractControl,
-  ControlValueAccessor,
   FormBuilder,
   FormGroup,
   NG_VALIDATORS,
@@ -10,13 +9,12 @@ import {
   ValidatorFn,
   Validators,
 } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { PatientModel } from "../../../core/models/users/patient.model";
 import { CreateUseService } from "../../../core/service/user/create-user.service";
 import { CpfValidator } from "../../../shared/validators/cpf.validator";
 import { PasswordValidator } from "../../../shared/validators/password.validator";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { BcSnackbarComponent } from "../../../shared/components/bc-snackbar/bc-snackbar.component";
 import { CreateHospitalService } from "../../../core/service/user/hospital-user.service";
 import { HospitalModel } from "../../../core/models/users/hospital.model";
 
@@ -43,8 +41,10 @@ export class RegisterUserComponent implements OnInit {
   public typePassword: string = "text";
   public typeCofirmPassword: string = "text";
   public buttonDisabled: boolean = false;
+  public loading: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
+    private router: Router,
     private route: ActivatedRoute,
     private userService: CreateUseService,
     private hospitalService: CreateHospitalService,
@@ -88,6 +88,7 @@ export class RegisterUserComponent implements OnInit {
   }
 
   register() {
+    this.loading = true;
     let user: any = null;
     user = {
       name: this.form.value.name,
@@ -95,7 +96,6 @@ export class RegisterUserComponent implements OnInit {
       email: this.form.value.emailUser,
       password: this.form.value.password,
     };
-
     if (this.urlPath === "patient") {
       user["cpf"] = this.form.value.cpf;
       this.createUserPatient(user);
@@ -118,9 +118,12 @@ export class RegisterUserComponent implements OnInit {
     return this.userService.execute(patient).subscribe({
       complete: () => {
         this.message("criado com sucesso");
+        this.loading = false;
+        this.router.navigate(["login"]);
       },
       error: (error) => {
         this.message(error.error.message);
+        this.loading = false;
       },
     });
   }
@@ -129,9 +132,12 @@ export class RegisterUserComponent implements OnInit {
     return this.hospitalService.execute(hospital).subscribe({
       complete: () => {
         this.message("criado com sucesso");
+        this.loading = false;
+        this.router.navigate(["login"]);
       },
       error: (error) => {
         this.message(error.error.message);
+        this.loading = false;
       },
     });
   }

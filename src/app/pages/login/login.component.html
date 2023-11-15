@@ -1,1 +1,58 @@
-<p>login works!</p>
+<div class="login-main">
+  <bc-base-page [isRegister]="true"></bc-base-page>
+  <div class="cards">
+    <mat-card class="card">
+      <mat-card-header class="header">
+        <mat-card-title>Fazer login </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <form [formGroup]="form" class="form">
+          <mat-form-field class="input">
+            <mat-label>CPF/CPNJ</mat-label>
+            <input type="text" matInput formControlName="login" />
+            @if (form.controls['login'].hasError('required')) {
+            <mat-error>CPF/CNPJ é obrigatorio</mat-error>
+            }@if (form.controls['login'].hasError('minlength')) {
+            <mat-error>CPF/CNPJ invalido</mat-error>
+            }@if (form.controls['login'].hasError('maxlength')) {
+            <mat-error>CPF/CNPJ invalido</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="input">
+            <mat-label>Senha</mat-label>
+            <input [type]="typePassword" matInput formControlName="password" />
+            @if (form.controls['password'].hasError('required')) {
+            <mat-error>Senha é obrigatorio</mat-error>
+            } @if(typePassword === "text") {
+            <button
+              matSuffix
+              mat-icon-button
+              (click)="typePassword = 'password'">
+              <mat-icon class="icon material-icons-outlined"
+                >visibility_off</mat-icon
+              >
+            </button>
+            } @if(typePassword === "password") {
+            <button matSuffix mat-icon-button (click)="typePassword = 'text'">
+              <mat-icon class="icon material-icons-outlined"
+                >visibility</mat-icon
+              >
+            </button>
+            }
+          </mat-form-field>
+        </form>
+        <button
+          class="button-login"
+          mat-raised-button
+          color="primary"
+          [disabled]="form.invalid"
+          (click)="login()">
+          Entrar
+        </button>
+        <a class="link" routerLink="/register">Crie sua conta</a>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<bc-loading [loading]="loading"></bc-loading>
