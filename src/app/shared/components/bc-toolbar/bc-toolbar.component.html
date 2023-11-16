@@ -3,6 +3,28 @@
     <div [ngClass]="isRegister === false ? 'toolbar' : 'register'">
       <div class="logo">
         <img class="image" src="../../../../assets/images/logo-v2.png" alt="" />
+        <div class="menus">
+          <div class="menu">
+            <button
+              mat-button
+              class="button"
+              color="primary"
+              [matMenuTriggerFor]="menuPatient"
+              aria-label="Example icon-button with a menu">
+              consulta
+            </button>
+          </div>
+          <div class="menu">
+            <button
+              mat-button
+              class="button"
+              color="primary"
+              [matMenuTriggerFor]="menuHospital"
+              aria-label="Example icon-button with a menu">
+              Medico
+            </button>
+          </div>
+        </div>
       </div>
       <div class="profile" *ngIf="isRegister === false && isHome === false">
         <button class="button" mat-icon-button [matMenuTriggerFor]="menu">
@@ -11,13 +33,15 @@
           >
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon>dialpad</mat-icon>
-            <span>Iniciar sessao</span>
+          <button mat-menu-item (click)="profile()">
+            <mat-icon class="icon material-icons-outlined"
+              >account_circle</mat-icon
+            >
+            <span>Perfil</span>
           </button>
-          <button mat-menu-item>
-            <mat-icon>notifications_off</mat-icon>
-            <span>Cadastra-se</span>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon class="icon material-icons-outlined">logout</mat-icon>
+            <span>Sair</span>
           </button>
         </mat-menu>
       </div>
@@ -31,3 +55,32 @@
     </div>
   </mat-toolbar>
 </div>
+<mat-menu #menuPatient="matMenu">
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span>123</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>voicemail</mat-icon>
+    <span>123</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>123</span>
+  </button>
+</mat-menu>
+
+<mat-menu #menuHospital="matMenu">
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span>333</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>voicemail</mat-icon>
+    <span>333</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>333</span>
+  </button>
+</mat-menu>

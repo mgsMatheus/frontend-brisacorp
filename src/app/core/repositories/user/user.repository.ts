@@ -11,4 +11,6 @@ export abstract class UserRepository {
     hospital?: HospitalModel,
   ): Observable<HospitalModel>;
   abstract authUser(user?: LoginModel): Observable<UserAuthenticatedModel>;
+  abstract mePatient(): Observable<PatientModel>;
+  abstract meHospital(): Observable<HospitalModel>;
 }

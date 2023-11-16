@@ -7,13 +7,7 @@ import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [HomeComponent],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    BcBasePageModule,
-    MatButtonModule,
-    HomeRoutingModule,
-  ],
+  imports: [CommonModule, HomeRoutingModule, BcBasePageModule, MatButtonModule],
   exports: [HomeComponent],
 })
 export class HomeModule {}

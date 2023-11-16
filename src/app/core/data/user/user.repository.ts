@@ -23,4 +23,11 @@ export class UserDataRespository extends UserRepository {
   public authUser(user?: LoginModel): Observable<UserAuthenticatedModel> {
     return this.http.post<UserAuthenticatedModel>("/auth/login", user);
   }
+
+  public mePatient() {
+    return this.http.get<PatientModel>("/users/me");
+  }
+  public meHospital() {
+    return this.http.get<HospitalModel>("/hospitals/me");
+  }
 }

@@ -44,7 +44,7 @@ export class LoginComponent {
         this.authTokenService.save(response.token);
       },
       complete: () => {
-        this.message("logou");
+        this.message("Entrou com sucesso");
         this.loading = false;
         this.router.navigate(["/dashboard"]);
       },

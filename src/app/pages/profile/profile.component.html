@@ -1,0 +1,52 @@
+<div class="profile">
+  <bc-base-page></bc-base-page>
+  <div class="cards">
+    <mat-card class="card">
+      <mat-card-header class="header">
+        <mat-card-title>Perfil do usuario</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <form [formGroup]="form" class="form">
+          <div>
+            <mat-form-field class="input">
+              <mat-label>CPF/CPNJ</mat-label>
+              <input
+                type="text"
+                matInput
+                [readonly]="true"
+                formControlName="cpf" />
+            </mat-form-field>
+            <mat-form-field class="input-second">
+              <mat-label>Nome</mat-label>
+              <input
+                type="text"
+                matInput
+                [readonly]="true"
+                formControlName="name" />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="input">
+              <mat-label>E-mail</mat-label>
+              <input
+                type="text"
+                matInput
+                [readonly]="true"
+                formControlName="email" />
+            </mat-form-field>
+            <mat-form-field class="input-second">
+              <mat-label>Telefone</mat-label>
+              <input
+                type="text"
+                matInput
+                [readonly]="true"
+                formControlName="phone" />
+            </mat-form-field>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+'
+<bc-loading [loading]="loading"></bc-loading>

@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { Router } from "@angular/router";
+import { AuthTokenService } from "../../../infra/services/auth-token.service";
 
 @Component({
   selector: "bc-toolbar",
@@ -10,9 +11,21 @@ export class BcToolbarComponent {
   @Input() isRegister = false;
   @Input() isHome = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authTokenService: AuthTokenService,
+  ) {}
 
   toRedirect() {
     this.router.navigate(["login"]);
+  }
+
+  logout() {
+    this.authTokenService.destroy();
+    this.router.navigate(["home"]);
+  }
+
+  profile() {
+    this.router.navigate(["profile"]);
   }
 }

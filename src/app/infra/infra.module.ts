@@ -6,6 +6,7 @@ import { ApiPrefixInterceptor } from "./intercerptors/api-prefix.intercerptors";
 import { AuthTokenService } from "./services/auth-token.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { NoAuthGuard } from "./guards/no-auth-guard";
+import { HttpTokenInterceptor } from "./intercerptors/http-token.interceptor";
 
 @NgModule({
   declarations: [],
@@ -14,6 +15,7 @@ import { NoAuthGuard } from "./guards/no-auth-guard";
     AuthTokenService,
     AuthGuard,
     NoAuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiPrefixInterceptor,

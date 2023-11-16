@@ -9,4 +9,9 @@
     .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
     color: white !important;
   }
+
+  .mat-mdc-menu-item .mat-icon-no-color,
+  .mat-mdc-menu-item .mat-mdc-menu-submenu-icon {
+    color: #026272 !important;
+  }
 }
