@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: "bc-table",
@@ -8,7 +9,7 @@ import { Component, Input, OnInit } from "@angular/core";
 export class BcTableComponent implements OnInit {
   @Input() columns: any[] = [];
   columnsToDisplay: string[] = [];
-  @Input() data: any[] = [];
+  @Input() data = new MatTableDataSource<any>();
 
   ngOnInit(): void {
     let columns: string[] = [];

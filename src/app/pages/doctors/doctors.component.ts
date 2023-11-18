@@ -1,94 +1,92 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MeHospitalService } from "../../core/service/user/me-hospital.service";
+import { GetDoctorService } from "../../core/service/hospital/get-doctor.service";
+import { FilterDoctorModel } from "../../core/models/hospitals/filter-doctor.model";
+import { DoctorsModel } from "../../core/models/hospitals/doctor.model";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: "app-doctors",
   templateUrl: "./doctors.component.html",
   styleUrl: "./doctors.component.scss",
 })
-export class DoctorsComponent {
+export class DoctorsComponent implements OnInit {
+  public loading: boolean = false;
   columns: any[] = [
     {
       value: "name",
       describe: "Nome",
     },
     {
-      value: "weight",
-      describe: "Nome",
+      value: "specialty",
+      describe: "Especialidade",
+    },
+    {
+      value: "actions",
+      describe: "",
     },
   ];
-  data;
-  constructor() {
-    this.data = [
-      {
-        position: 1,
-        name: "Hydrogen",
-        weight: 1.0079,
-        symbol: "H",
-        actions: "Horarios dsiponiveis",
+  data: MatTableDataSource<DoctorsModel>;
+  constructor(
+    private meHospitalService: MeHospitalService,
+    private snackbar: MatSnackBar,
+    private getDoctorService: GetDoctorService,
+  ) {}
+
+  ngOnInit() {
+    this.getIdHospital();
+  }
+
+  async getIdHospital() {
+    this.loading = true;
+    let params: FilterDoctorModel = {
+      doctor: "",
+      specialty: "",
+    };
+    this.meHospitalService.execute().subscribe({
+      next: (response) => {
+        this.getDoctor(response.id, params);
       },
-      {
-        position: 2,
-        name: "Helium",
-        weight: 4.0026,
-        symbol: "He",
-        actions: false,
+      error: (e) => {
+        this.message(e.error.message);
+        this.loading = false;
       },
-      {
-        position: 3,
-        name: "Lithium",
-        weight: 6.941,
-        symbol: "Li",
-        actions: false,
+      complete: () => {
+        this.loading = false;
       },
-      {
-        position: 4,
-        name: "Beryllium",
-        weight: 9.0122,
-        symbol: "Be",
-        actions: false,
+    });
+  }
+  message(message: string) {
+    this.snackbar.open(message, "Fechar", {
+      duration: 10000,
+    });
+  }
+
+  async getDoctor(id: any, params: FilterDoctorModel) {
+    this.loading = true;
+    await this.getDoctorService.execute(id, params).subscribe({
+      next: (response) => {
+        let doctors: any[] = [];
+        response.forEach((item) => {
+          doctors.push({
+            name: item.doctors.name,
+            specialty: item.doctors.specialty,
+            actions: {
+              name: "Horario",
+              id: item.id,
+            },
+          });
+        });
+        this.data = new MatTableDataSource(doctors);
       },
-      {
-        position: 5,
-        name: "Boron",
-        weight: 10.811,
-        symbol: "B",
-        actions: false,
+      error: (e) => {
+        this.message(e.error.message);
+        this.loading = false;
       },
-      {
-        position: 6,
-        name: "Carbon",
-        weight: 12.0107,
-        symbol: "C",
-        actions: false,
+      complete: () => {
+        this.loading = false;
       },
-      {
-        position: 7,
-        name: "Nitrogen",
-        weight: 14.0067,
-        symbol: "N",
-        actions: false,
-      },
-      {
-        position: 8,
-        name: "Oxygen",
-        weight: 15.9994,
-        symbol: "O",
-        actions: false,
-      },
-      {
-        position: 9,
-        name: "Fluorine",
-        weight: 18.9984,
-        symbol: "F",
-        actions: false,
-      },
-      {
-        position: 10,
-        name: "Neon",
-        weight: 20.1797,
-        symbol: "Ne",
-        actions: false,
-      },
-    ];
+    });
   }
 }

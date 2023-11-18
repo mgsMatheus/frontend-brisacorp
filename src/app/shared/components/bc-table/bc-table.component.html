@@ -1,14 +1,14 @@
 <table mat-table [dataSource]="data" class="mat-elevation-z8">
   <ng-container [matColumnDef]="column.value" *ngFor="let column of columns">
-    <div *ngIf="column !== 'actions'">
+    <div *ngIf="column.value !== 'actions'">
       <th mat-header-cell *matHeaderCellDef>{{ column.describe }}</th>
       <td mat-cell *matCellDef="let element">{{ element[column.value] }}</td>
     </div>
-    <div *ngIf="column === 'actions'">
-      <th mat-header-cell *matHeaderCellDef>Ações</th>
+    <div *ngIf="column.value === 'actions'">
+      <th mat-header-cell *matHeaderCellDef>{{ column.describe }}</th>
       <td mat-cell *matCellDef="let element">
         <button mat-button class="button" color="primary">
-          {{ element[column] }}
+          {{ element[column.value]?.name }}
         </button>
       </td>
     </div>
