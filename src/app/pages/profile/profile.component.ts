@@ -43,7 +43,6 @@ export class ProfileComponent implements OnInit {
         });
       },
       error: (e) => {
-        console.log(e);
         if (e.error.message == "Usuario não encontrado") {
           this.meHospital();
         } else {

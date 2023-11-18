@@ -3,7 +3,7 @@
     <div [ngClass]="isRegister === false ? 'toolbar' : 'register'">
       <div class="logo">
         <img class="image" src="../../../../assets/images/logo-v2.png" alt="" />
-        <div class="menus">
+        <div class="menus" *ngIf="isRegister === false && isHome === false">
           <div class="menu">
             <button
               mat-button
@@ -19,9 +19,8 @@
               mat-button
               class="button"
               color="primary"
-              [matMenuTriggerFor]="menuHospital"
-              aria-label="Example icon-button with a menu">
-              Medico
+              (click)="toRedirectDoctors()">
+              Medicos
             </button>
           </div>
         </div>
@@ -67,20 +66,5 @@
   <button mat-menu-item>
     <mat-icon>notifications_off</mat-icon>
     <span>123</span>
-  </button>
-</mat-menu>
-
-<mat-menu #menuHospital="matMenu">
-  <button mat-menu-item>
-    <mat-icon>dialpad</mat-icon>
-    <span>333</span>
-  </button>
-  <button mat-menu-item disabled>
-    <mat-icon>voicemail</mat-icon>
-    <span>333</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>notifications_off</mat-icon>
-    <span>333</span>
   </button>
 </mat-menu>

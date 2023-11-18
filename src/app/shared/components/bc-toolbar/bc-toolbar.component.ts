@@ -25,6 +25,10 @@ export class BcToolbarComponent {
     this.router.navigate(["home"]);
   }
 
+  toRedirectDoctors() {
+    this.router.navigate(["doctors"]);
+  }
+
   profile() {
     this.router.navigate(["profile"]);
   }
