@@ -3,7 +3,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  .table {
+  flex-direction: column;
+  .filters {
+    display: flex;
     width: 50%;
+    align-items: center;
+    margin-bottom: 30px;
+    .input {
+      margin-right: 30px;
+      width: 300px;
+    }
+  }
+  .table {
+    margin-top: 50px;
+    width: 50%;
+    .register {
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      margin-bottom: 20px;
+    }
   }
 }

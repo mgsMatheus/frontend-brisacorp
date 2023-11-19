@@ -1,4 +1,4 @@
-import { DoctorModel } from "../../models/hospitals/doctor.model";
+import { DoctorModel, DoctorsModel } from "../../models/hospitals/doctor.model";
 import { Observable } from "rxjs";
 import { FilterDoctorModel } from "../../models/hospitals/filter-doctor.model";
 export abstract class HospitalRepository {
@@ -6,4 +6,9 @@ export abstract class HospitalRepository {
     hospitalId: string,
     filter: FilterDoctorModel,
   ): Observable<DoctorModel[]>;
+
+  abstract createDoctor(
+    hospitalId: string,
+    filter: DoctorsModel,
+  ): Observable<DoctorModel>;
 }

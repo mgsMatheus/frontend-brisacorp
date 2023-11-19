@@ -5,6 +5,10 @@ import { GetDoctorService } from "../../core/service/hospital/get-doctor.service
 import { FilterDoctorModel } from "../../core/models/hospitals/filter-doctor.model";
 import { DoctorsModel } from "../../core/models/hospitals/doctor.model";
 import { MatTableDataSource } from "@angular/material/table";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { HoursAvailableComponent } from "./hours-available/hours-available.component";
+import { DoctorComponent } from "./doctor/doctor.component";
 
 @Component({
   selector: "app-doctors",
@@ -12,7 +16,9 @@ import { MatTableDataSource } from "@angular/material/table";
   styleUrl: "./doctors.component.scss",
 })
 export class DoctorsComponent implements OnInit {
+  public form: FormGroup;
   public loading: boolean = false;
+  public idHospital: any;
   columns: any[] = [
     {
       value: "name",
@@ -24,7 +30,7 @@ export class DoctorsComponent implements OnInit {
     },
     {
       value: "actions",
-      describe: "",
+      describe: "Horarios",
     },
   ];
   data: MatTableDataSource<DoctorsModel>;
@@ -32,13 +38,20 @@ export class DoctorsComponent implements OnInit {
     private meHospitalService: MeHospitalService,
     private snackbar: MatSnackBar,
     private getDoctorService: GetDoctorService,
-  ) {}
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog,
+  ) {
+    this.form = formBuilder.group({
+      name: [""],
+      specialty: [""],
+    });
+  }
 
   ngOnInit() {
     this.getIdHospital();
   }
 
-  async getIdHospital() {
+  getIdHospital() {
     this.loading = true;
     let params: FilterDoctorModel = {
       doctor: "",
@@ -46,6 +59,7 @@ export class DoctorsComponent implements OnInit {
     };
     this.meHospitalService.execute().subscribe({
       next: (response) => {
+        this.idHospital = response.id;
         this.getDoctor(response.id, params);
       },
       error: (e) => {
@@ -63,9 +77,9 @@ export class DoctorsComponent implements OnInit {
     });
   }
 
-  async getDoctor(id: any, params: FilterDoctorModel) {
+  getDoctor(id: any, params: FilterDoctorModel) {
     this.loading = true;
-    await this.getDoctorService.execute(id, params).subscribe({
+    this.getDoctorService.execute(id, params).subscribe({
       next: (response) => {
         let doctors: any[] = [];
         response.forEach((item) => {
@@ -73,12 +87,13 @@ export class DoctorsComponent implements OnInit {
             name: item.doctors.name,
             specialty: item.doctors.specialty,
             actions: {
-              name: "Horario",
-              id: item.id,
+              name: "edit_calendar",
+              id: item.doctors._id,
             },
           });
         });
         this.data = new MatTableDataSource(doctors);
+        this.message(doctors.length + " medicos encontrados");
       },
       error: (e) => {
         this.message(e.error.message);
@@ -87,6 +102,37 @@ export class DoctorsComponent implements OnInit {
       complete: () => {
         this.loading = false;
       },
+    });
+  }
+
+  filterDoctor() {
+    let params: FilterDoctorModel = {
+      doctor: this.form.value.name,
+      specialty: this.form.value.specialty,
+    };
+    this.getDoctor(this.idHospital, params);
+  }
+
+  valuesAction(event: any) {
+    let ref = this.dialog.open(HoursAvailableComponent, {
+      width: "1250px",
+    });
+    ref.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openRegisterDoctor() {
+    let ref = this.dialog.open(DoctorComponent, {
+      width: "570px",
+      data: {
+        hospitalId: this.idHospital,
+      },
+    });
+    ref.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.filterDoctor();
+      }
     });
   }
 }

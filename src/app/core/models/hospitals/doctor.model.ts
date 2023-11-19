@@ -4,6 +4,7 @@ export interface DoctorModel {
 }
 
 export interface DoctorsModel {
+  _id?: string;
   name: string;
   specialty: string;
 }

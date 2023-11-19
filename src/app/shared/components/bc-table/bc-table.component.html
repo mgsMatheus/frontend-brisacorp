@@ -7,8 +7,14 @@
     <div *ngIf="column.value === 'actions'">
       <th mat-header-cell *matHeaderCellDef>{{ column.describe }}</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button class="button" color="primary">
-          {{ element[column.value]?.name }}
+        <button
+          mat-icon-button
+          class="button"
+          color="primary"
+          (click)="valuesAction(element[column.value])">
+          <mat-icon class="icon material-icons-outlined">{{
+            element[column.value]?.name
+          }}</mat-icon>
         </button>
       </td>
     </div>

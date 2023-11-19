@@ -1,6 +1,41 @@
 <bc-base-page></bc-base-page>
 <div class="doctors">
+  <div class="filters">
+    <form [formGroup]="form" class="form">
+      <mat-form-field class="input">
+        <mat-label>Nome do Medico</mat-label>
+        <input type="text" matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field class="input">
+        <mat-label>Especialidade</mat-label>
+        <input type="text" matInput formControlName="specialty" />
+      </mat-form-field>
+    </form>
+    <div class="button">
+      <button
+        class="button-login"
+        mat-raised-button
+        color="primary"
+        (click)="filterDoctor()">
+        Pesquisar
+      </button>
+    </div>
+  </div>
   <div class="table">
-    <bc-table [columns]="columns" [data]="data"></bc-table>
+    <div class="register">
+      <button
+        class="button-login"
+        mat-stroked-button
+        color="primary"
+        (click)="openRegisterDoctor()">
+        Cadastrar Medico
+      </button>
+    </div>
+    <bc-table
+      [columns]="columns"
+      [data]="data"
+      (valuesActions)="valuesAction($event)"></bc-table>
   </div>
 </div>
+
+<bc-loading [loading]="loading"></bc-loading>

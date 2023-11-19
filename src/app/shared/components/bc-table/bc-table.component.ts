@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
@@ -10,10 +10,15 @@ export class BcTableComponent implements OnInit {
   @Input() columns: any[] = [];
   columnsToDisplay: string[] = [];
   @Input() data = new MatTableDataSource<any>();
+  @Output() valuesActions = new EventEmitter();
 
   ngOnInit(): void {
     let columns: string[] = [];
     this.columns.forEach((item) => columns.push(item.value));
     this.columnsToDisplay = columns.slice();
+  }
+
+  valuesAction(event: any) {
+    this.valuesActions.emit(event);
   }
 }

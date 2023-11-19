@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Cadastrar Medico</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" class="form">
+    <div>
+      <mat-form-field class="input">
+        <mat-label>Nome do Medico</mat-label>
+        <input type="text" matInput formControlName="name" />
+        @if (form.controls['name'].hasError('required')) {
+        <mat-error>Nome é obrigatorio</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="input-second">
+        <mat-label>Especialidade</mat-label>
+        <input type="text" matInput formControlName="specialty" />
+        @if (form.controls['specialty'].hasError('required')) {
+        <mat-error>Especialidade é obrigatorio</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </form></mat-dialog-content
+>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close mat-stroked-button color="primary">
+    Cancelar
+  </button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    mat-raised-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="createDoctor()">
+    Cadastrar
+  </button>
+</mat-dialog-actions>
+
+<bc-loading [loading]="loading"></bc-loading>
