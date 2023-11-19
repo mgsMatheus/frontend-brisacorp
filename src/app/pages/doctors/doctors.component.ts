@@ -30,7 +30,7 @@ export class DoctorsComponent implements OnInit {
     },
     {
       value: "actions",
-      describe: "Horarios",
+      describe: "Datas",
     },
   ];
   data: MatTableDataSource<DoctorsModel>;
