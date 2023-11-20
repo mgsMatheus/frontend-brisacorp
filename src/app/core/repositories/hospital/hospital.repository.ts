@@ -11,4 +11,6 @@ export abstract class HospitalRepository {
     hospitalId: string,
     filter: DoctorsModel,
   ): Observable<DoctorModel>;
+
+  abstract getDoctorById(id: string): Observable<DoctorModel[]>;
 }

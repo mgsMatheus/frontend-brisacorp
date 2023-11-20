@@ -116,6 +116,9 @@ export class DoctorsComponent implements OnInit {
   valuesAction(event: any) {
     let ref = this.dialog.open(HoursAvailableComponent, {
       width: "1250px",
+      data: {
+        doctorId: event.id,
+      },
     });
     ref.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);

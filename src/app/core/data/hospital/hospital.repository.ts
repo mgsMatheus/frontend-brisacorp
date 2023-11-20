@@ -23,4 +23,8 @@ export class HospitalDataRespository extends HospitalRepository {
       filter,
     );
   }
+
+  public getDoctorById(id: string) {
+    return this.http.get<DoctorModel[]>("/hospitals/doctor/" + id);
+  }
 }
