@@ -53,8 +53,15 @@
       </mat-form-field>
     </div>
   </form>
-  {{ hours | json }}
-  {{ form.value.date }}
+
+  <div class="table">
+    <div class="register">
+      <button class="button-login" mat-stroked-button color="primary">
+        Cadastrar Medico
+      </button>
+    </div>
+    <bc-table [columns]="columns" [data]="dataTable"></bc-table>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>

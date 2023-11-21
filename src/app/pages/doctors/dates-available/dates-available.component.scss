@@ -26,6 +26,16 @@
       }
     }
   }
+  .table {
+    margin-top: 50px;
+    width: 60%;
+    .register {
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      margin-bottom: 20px;
+    }
+  }
 }
 
 ::ng-deep {

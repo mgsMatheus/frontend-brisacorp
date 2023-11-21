@@ -7,7 +7,7 @@ import { DoctorsModel } from "../../core/models/hospitals/doctor.model";
 import { MatTableDataSource } from "@angular/material/table";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
-import { HoursAvailableComponent } from "./hours-available/hours-available.component";
+import { DatesAvailableComponent } from "./dates-available/dates-available.component";
 import { DoctorComponent } from "./doctor/doctor.component";
 
 @Component({
@@ -114,7 +114,7 @@ export class DoctorsComponent implements OnInit {
   }
 
   valuesAction(event: any) {
-    let ref = this.dialog.open(HoursAvailableComponent, {
+    this.dialog.open(DatesAvailableComponent, {
       width: "1250px",
       autoFocus: false,
       disableClose: true,

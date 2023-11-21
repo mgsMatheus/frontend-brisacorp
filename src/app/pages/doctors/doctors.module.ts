@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatDialogModule } from "@angular/material/dialog";
-import { HoursAvailableComponent } from "./hours-available/hours-available.component";
+import { DatesAvailableComponent } from "./dates-available/dates-available.component";
 import { DoctorComponent } from "./doctor/doctor.component";
 import {
   DateAdapter,
@@ -30,7 +30,7 @@ import { MatChipInputEvent, MatChipsModule } from "@angular/material/chips";
 import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
-  declarations: [DoctorsComponent, HoursAvailableComponent, DoctorComponent],
+  declarations: [DoctorsComponent, DatesAvailableComponent, DoctorComponent],
   imports: [
     CommonModule,
     DoctorsRoutingModule,
@@ -50,7 +50,7 @@ import { MatIconModule } from "@angular/material/icon";
     MatChipsModule,
     MatIconModule,
   ],
-  exports: [DoctorsComponent, HoursAvailableComponent, DoctorComponent],
+  exports: [DoctorsComponent, DatesAvailableComponent, DoctorComponent],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: "pt-BR" },
     {
