@@ -8,8 +8,9 @@ import { AuthTokenService } from "../../../infra/services/auth-token.service";
   styleUrl: "./bc-toolbar.component.scss",
 })
 export class BcToolbarComponent {
-  @Input() isRegister = false;
-  @Input() isHome = false;
+  @Input() isRegister: boolean = false;
+  @Input() isHome: boolean = false;
+  @Input() typeUser: string = "";
 
   constructor(
     private router: Router,

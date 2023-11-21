@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { MePatientService } from "../../core/service/user/me-patient.service";
-import { error } from "console";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MeHospitalService } from "../../core/service/user/me-hospital.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
