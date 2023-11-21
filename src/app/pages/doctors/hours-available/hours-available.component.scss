@@ -5,6 +5,7 @@
   justify-content: center;
   flex-direction: column;
   .form {
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,6 +18,12 @@
     .input-second {
       margin-bottom: 30px;
       width: 300px;
+    }
+    .hours {
+      width: 100%;
+      .input-hour {
+        width: 100%;
+      }
     }
   }
 }

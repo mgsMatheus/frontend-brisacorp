@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { HospitalRepository } from "../../repositories/hospital/hospital.repository";
 import { DoctorModel, DoctorsModel } from "../../models/hospitals/doctor.model";
 import { FilterDoctorModel } from "../../models/hospitals/filter-doctor.model";
+import { DateAvailableModel } from "../../models/hospitals/date-available.model";
 
 @Injectable()
 export class HospitalDataRespository extends HospitalRepository {
@@ -26,5 +27,9 @@ export class HospitalDataRespository extends HospitalRepository {
 
   public getDoctorById(id: string) {
     return this.http.get<DoctorModel[]>("/hospitals/doctor/" + id);
+  }
+
+  public getDateAvailable(doctorId: string) {
+    return this.http.get<DateAvailableModel[]>("/datesAvailables/" + doctorId);
   }
 }

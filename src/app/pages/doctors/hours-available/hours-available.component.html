@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Detalhes</h2>
-<mat-dialog-content class="mat-typography content">
+<mat-dialog-content class="content">
   <form [formGroup]="form" class="form">
     <div>
       <mat-form-field class="input input-readonly">
@@ -15,7 +15,46 @@
           formControlName="specialty" />
       </mat-form-field>
     </div>
+    <div>
+      <mat-form-field class="input">
+        <mat-label>Data</mat-label>
+        <input
+          matInput
+          [min]="today"
+          [matDatepicker]="picker"
+          formControlName="date" />
+        @if (form.controls['date'].hasError('matDatepickerParse')) {
+        <mat-error>Data invalida</mat-error>
+        }
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="hours">
+      <mat-form-field class="input-hour">
+        <mat-label>Horas disponiveis</mat-label>
+        <mat-chip-grid #chipGrid formControlName="hours">
+          @for (hour of hours; track hour) {
+          <mat-chip-row (removed)="removeHour(hour)">
+            {{ hour }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          }
+        </mat-chip-grid>
+        <input
+          BcMask="00:00"
+          BcType="number"
+          [matChipInputFor]="chipGrid"
+          (matChipInputTokenEnd)="add($event)" />
+      </mat-form-field>
+    </div>
   </form>
+  {{ hours | json }}
+  {{ form.value.date }}
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>

@@ -116,12 +116,11 @@ export class DoctorsComponent implements OnInit {
   valuesAction(event: any) {
     let ref = this.dialog.open(HoursAvailableComponent, {
       width: "1250px",
+      autoFocus: false,
+      disableClose: true,
       data: {
         doctorId: event.id,
       },
-    });
-    ref.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -131,6 +130,8 @@ export class DoctorsComponent implements OnInit {
       data: {
         hospitalId: this.idHospital,
       },
+      autoFocus: false,
+      disableClose: true,
     });
     ref.afterClosed().subscribe((result) => {
       if (result === true) {
