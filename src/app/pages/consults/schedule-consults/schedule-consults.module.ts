@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { PatientsComponent } from "./patients.component";
-import { PatientsRoutingModule } from "./patients-routing.module";
-import { BcBasePageModule } from "../../shared/components/bc-base-page/bc-base-page.module";
-import { BcLoadingModule } from "../../shared/components/bc-loading/bc-loading.module";
-import { BcSnackbarModule } from "../../shared/components/bc-snackbar/bc-snackbar.module";
+import { ScheduleConsultsComponent } from "./schedule-consults.component";
+import { ScheduleConsultsRoutingModule } from "./schedule-consults-routing.module";
+import { BcBasePageModule } from "../../../shared/components/bc-base-page/bc-base-page.module";
+import { BcLoadingModule } from "../../../shared/components/bc-loading/bc-loading.module";
+import { BcSnackbarModule } from "../../../shared/components/bc-snackbar/bc-snackbar.module";
 import { MatButtonModule } from "@angular/material/button";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -13,10 +13,10 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
-  declarations: [PatientsComponent],
+  declarations: [ScheduleConsultsComponent],
   imports: [
     CommonModule,
-    PatientsRoutingModule,
+    ScheduleConsultsRoutingModule,
     BcBasePageModule,
     BcLoadingModule,
     BcSnackbarModule,
@@ -28,6 +28,6 @@ import { MatSelectModule } from "@angular/material/select";
     MatDialogModule,
     MatSelectModule,
   ],
-  exports: [PatientsComponent],
+  exports: [ScheduleConsultsComponent],
 })
-export class PatientsModule {}
+export class ScheduleConsultsModule {}

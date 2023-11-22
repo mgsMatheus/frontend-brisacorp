@@ -45,7 +45,9 @@ const routes: Routes = [
     path: "patients",
     canActivate: [AuthGuard],
     loadChildren: () =>
-      import("./pages/patients/patients.module").then((m) => m.PatientsModule),
+      import(
+        "./pages/consults/schedule-consults/schedule-consults.module"
+      ).then((m) => m.ScheduleConsultsModule),
   },
 ];
 

@@ -2,11 +2,11 @@ import { Component } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
-  selector: "patients",
-  templateUrl: "./patients.component.html",
-  styleUrl: "./patients.component.scss",
+  selector: "schedule-consults",
+  templateUrl: "./schedule-consults.component.html",
+  styleUrl: "./schedule-consults.component.scss",
 })
-export class PatientsComponent {
+export class ScheduleConsultsComponent {
   form: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
