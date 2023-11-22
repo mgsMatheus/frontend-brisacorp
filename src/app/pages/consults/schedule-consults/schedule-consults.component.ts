@@ -5,6 +5,8 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { GetDateAvailableBySpecialtyService } from "../../../core/service/hospital/get-date-available-by-specialty.service";
 import { response } from "express";
 import { SpecialistModel } from "../../../core/models/hospitals/specialist.model";
+import { GetHourAvailableService } from "../../../core/service/hospital/get-hour-available.service";
+import { FilterHourAvailableModel } from "../../../core/models/hospitals/filter-hour-available.model";
 
 @Component({
   selector: "schedule-consults",
@@ -17,16 +19,19 @@ export class ScheduleConsultsComponent implements OnInit {
 
   specialties: string[] = [];
   datesAvailables: any[] = [];
+  hoursAvailables: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private getSpecialistService: GetSpeciliastService,
     private getDatesBySpecialtyService: GetDateAvailableBySpecialtyService,
+    private getHourAvailableService: GetHourAvailableService,
     private snackbar: MatSnackBar,
   ) {
     this.form = formBuilder.group({
       specialty: [""],
       dates: [""],
+      hour: [""],
     });
   }
 
@@ -55,8 +60,19 @@ export class ScheduleConsultsComponent implements OnInit {
   somethingChanged() {
     this.form.controls["dates"].setValue("");
     this.datesAvailables = [];
+    this.form.controls["hour"].setValue("");
+    this.hoursAvailables = [];
     if (this.form.value.specialty !== undefined) {
       this.getDatesBySpecialty();
+    }
+  }
+
+  somethingChangedDates() {
+    if (
+      this.form.value.specialty !== undefined &&
+      this.form.value.dates !== undefined
+    ) {
+      this.getHourAvailable();
     }
   }
 
@@ -69,6 +85,31 @@ export class ScheduleConsultsComponent implements OnInit {
         response.forEach((item) => {
           item.datesDoctors?.forEach((dates) => {
             this.datesAvailables.push(dates.date);
+          });
+        });
+      },
+      error: (e) => {
+        this.message(e.error.message);
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
+  }
+
+  getHourAvailable() {
+    const filter: FilterHourAvailableModel = {
+      specialty: this.form.value.specialty,
+      date: this.form.value.dates,
+    };
+    this.getHourAvailableService.execute(filter).subscribe({
+      next: (response) => {
+        response.forEach((item) => {
+          item.datesDoctors?.forEach((dates) => {
+            dates.hour?.forEach((item) => {
+              this.hoursAvailables.push(item);
+            });
           });
         });
       },

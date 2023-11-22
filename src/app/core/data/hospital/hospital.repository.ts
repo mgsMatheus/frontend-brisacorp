@@ -10,6 +10,7 @@ import {
   SpecialistsModel,
 } from "../../models/hospitals/specialist.model";
 import { DatesAvailablesBySpecialtyModel } from "../../models/hospitals/dates-availables.model";
+import { FilterHourAvailableModel } from "../../models/hospitals/filter-hour-available.model";
 
 @Injectable()
 export class HospitalDataRespository extends HospitalRepository {
@@ -55,6 +56,12 @@ export class HospitalDataRespository extends HospitalRepository {
     return this.http.get<DatesAvailablesBySpecialtyModel[]>(
       "/hospitals/dates-specialty",
       { params: specialty as any },
+    );
+  }
+  public getHourAvailable(filter: FilterHourAvailableModel) {
+    return this.http.get<DatesAvailablesBySpecialtyModel[]>(
+      "/hospitals/dates-specialty",
+      { params: filter as any },
     );
   }
 }

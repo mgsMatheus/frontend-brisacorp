@@ -17,15 +17,31 @@
         </mat-form-field>
         <mat-form-field class="input">
           <mat-label>Datas disponiveis</mat-label>
-          <mat-select formControlName="dates">
+          <mat-select
+            formControlName="dates"
+            (selectionChange)="somethingChangedDates()">
             <mat-option>Nenhum</mat-option>
             @for (date of datesAvailables; track date) {
             <mat-option [value]="date">{{ date }}</mat-option>
             }
           </mat-select>
         </mat-form-field>
+        <mat-form-field class="input">
+          <mat-label>Horario disponiveis</mat-label>
+          <mat-select formControlName="hour">
+            <mat-option>Nenhum</mat-option>
+            @for (hour of hoursAvailables; track hour) {
+            <mat-option [value]="hour">{{ hour }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
       </div>
     </form>
+  </div>
+  <div class="filters">
+    <button class="button" mat-button mat-raised-button color="primary">
+      Buscar
+    </button>
   </div>
 </div>
 
