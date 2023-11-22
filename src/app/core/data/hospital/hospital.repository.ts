@@ -4,6 +4,7 @@ import { HospitalRepository } from "../../repositories/hospital/hospital.reposit
 import { DoctorModel, DoctorsModel } from "../../models/hospitals/doctor.model";
 import { FilterDoctorModel } from "../../models/hospitals/filter-doctor.model";
 import { DateAvailableModel } from "../../models/hospitals/date-available.model";
+import { FilterDateAvailableModel } from "../../models/hospitals/filter-date-available.model";
 
 @Injectable()
 export class HospitalDataRespository extends HospitalRepository {
@@ -31,5 +32,13 @@ export class HospitalDataRespository extends HospitalRepository {
 
   public getDateAvailable(doctorId: string) {
     return this.http.get<DateAvailableModel[]>("/datesAvailables/" + doctorId);
+  }
+
+  public createDateAvailable(filters: FilterDateAvailableModel) {
+    return this.http.post<DateAvailableModel>("/datesAvailables", filters);
+  }
+
+  public deleteDateAvailable(id: string) {
+    return this.http.delete<DateAvailableModel>("/datesAvailables/" + id);
   }
 }

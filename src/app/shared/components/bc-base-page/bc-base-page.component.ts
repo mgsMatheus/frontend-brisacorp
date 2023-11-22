@@ -21,7 +21,9 @@ export class BcBasePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mePatient();
+    if (this.isRegister === false && this.isHome === false) {
+      this.mePatient();
+    }
   }
 
   mePatient() {

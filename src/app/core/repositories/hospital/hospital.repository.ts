@@ -2,6 +2,7 @@ import { DoctorModel, DoctorsModel } from "../../models/hospitals/doctor.model";
 import { Observable } from "rxjs";
 import { FilterDoctorModel } from "../../models/hospitals/filter-doctor.model";
 import { DateAvailableModel } from "../../models/hospitals/date-available.model";
+import { FilterDateAvailableModel } from "../../models/hospitals/filter-date-available.model";
 export abstract class HospitalRepository {
   abstract getDoctors(
     hospitalId: string,
@@ -16,4 +17,10 @@ export abstract class HospitalRepository {
   abstract getDoctorById(id: string): Observable<DoctorModel[]>;
 
   abstract getDateAvailable(doctorId: string): Observable<DateAvailableModel[]>;
+
+  abstract createDateAvailable(
+    filters: FilterDateAvailableModel,
+  ): Observable<DateAvailableModel>;
+
+  abstract deleteDateAvailable(id: string): Observable<DateAvailableModel>;
 }

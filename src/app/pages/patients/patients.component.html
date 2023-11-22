@@ -1,0 +1,17 @@
+<bc-base-page></bc-base-page>
+
+<div class="patients">
+  <div class="filters">
+    <form [formGroup]="form" class="form">
+      <mat-form-field class="input">
+        <mat-label>Especialidade</mat-label>
+        <mat-select formControlName="specialty">
+          <mat-option>Nenhum</mat-option>
+          @for (food of foods; track food) {
+          <mat-option [value]="food">{{ food }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+</div>

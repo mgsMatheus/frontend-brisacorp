@@ -10,9 +10,8 @@
               mat-button
               class="button"
               color="primary"
-              [matMenuTriggerFor]="menuPatient"
-              aria-label="Example icon-button with a menu">
-              consulta
+              (click)="toRedirectPatients()">
+              Consulta
             </button>
           </div>
 
@@ -58,17 +57,3 @@
     </div>
   </mat-toolbar>
 </div>
-<mat-menu #menuPatient="matMenu">
-  <button mat-menu-item>
-    <mat-icon>dialpad</mat-icon>
-    <span>123</span>
-  </button>
-  <button mat-menu-item disabled>
-    <mat-icon>voicemail</mat-icon>
-    <span>123</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>notifications_off</mat-icon>
-    <span>123</span>
-  </button>
-</mat-menu>

@@ -11,6 +11,7 @@ export class BcTableComponent implements OnInit {
   columnsToDisplay: string[] = [];
   @Input() data = new MatTableDataSource<any>();
   @Output() valuesActions = new EventEmitter();
+  @Output() IdDelete = new EventEmitter();
 
   ngOnInit(): void {
     let columns: string[] = [];
@@ -20,5 +21,9 @@ export class BcTableComponent implements OnInit {
 
   valuesAction(event: any) {
     this.valuesActions.emit(event);
+  }
+
+  deleteItem(event: any) {
+    this.IdDelete.emit(event);
   }
 }

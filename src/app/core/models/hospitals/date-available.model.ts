@@ -1,5 +1,5 @@
 export interface DateAvailableModel {
-  id?: string;
+  _id?: string;
   date?: string;
   hour: string[];
 }

@@ -25,6 +25,10 @@
           formControlName="date" />
         @if (form.controls['date'].hasError('matDatepickerParse')) {
         <mat-error>Data invalida</mat-error>
+        }@if (form.controls['date'].hasError('matDatepickerMin')) {
+        <mat-error>Data menor que a data de hoje</mat-error>
+        } @if (form.controls['hours'].hasError('required')) {
+        <mat-error>Data é obrigatorio</mat-error>
         }
         <mat-datepicker-toggle
           matIconSuffix
@@ -50,22 +54,37 @@
           BcType="number"
           [matChipInputFor]="chipGrid"
           (matChipInputTokenEnd)="add($event)" />
+        @if (form.controls['hours'].hasError('required')) {
+        <mat-error>Pelo menos uma hora é obrigatorio</mat-error>
+        }
       </mat-form-field>
     </div>
   </form>
-
   <div class="table">
-    <div class="register">
-      <button class="button-login" mat-stroked-button color="primary">
-        Cadastrar Medico
+    <div class="date-available">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid"
+        (click)="createDateAvailable()">
+        Cadastrar Disponibilidade
       </button>
     </div>
-    <bc-table [columns]="columns" [data]="dataTable"></bc-table>
+    <bc-table
+      [columns]="columns"
+      [data]="dataTable"
+      (valuesActions)="valuesAction($event)"
+      (IdDelete)="deleteDateAvailable($event)"></bc-table>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    mat-raised-button
+    color="primary">
+    Fechar
+  </button>
 </mat-dialog-actions>
 
 <bc-loading [loading]="loading"></bc-loading>

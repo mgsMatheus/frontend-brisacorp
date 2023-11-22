@@ -42,10 +42,10 @@ const routes: Routes = [
       import("./pages/profile/profile.module").then((m) => m.ProfileModule),
   },
   {
-    path: "doctors",
+    path: "patients",
     canActivate: [AuthGuard],
     loadChildren: () =>
-      import("./pages/doctors/doctors.module").then((m) => m.DoctorsModule),
+      import("./pages/patients/patients.module").then((m) => m.PatientsModule),
   },
 ];
 

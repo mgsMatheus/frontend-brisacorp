@@ -1,13 +1,18 @@
 import { Component, Inject, inject } from "@angular/core";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { GetDoctorByIdService } from "../../../core/service/hospital/get-doctor-by-id.service";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { GetDatesAvailablesService } from "../../../core/service/hospital/get-datesAvailables.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { DateAvailableModel } from "../../../core/models/hospitals/date-available.model";
+import { HoursAvailablesComponent } from "./hours-availables/hours-availables.component";
+import { FilterDateAvailableModel } from "../../../core/models/hospitals/filter-date-available.model";
+import moment from "moment";
+import { CreateDateAvailableService } from "../../../core/service/hospital/create-date-available.service";
+import { DeleteDateAvailableService } from "../../../core/service/hospital/delete-date-available.service";
 
 @Component({
   selector: "app-hours-available",
@@ -29,6 +34,10 @@ export class DatesAvailableComponent {
       value: "actions",
       describe: "Horarios disponiveis",
     },
+    {
+      value: "delete",
+      describe: "Excluir",
+    },
   ];
 
   dataTable: MatTableDataSource<DateAvailableModel>;
@@ -38,13 +47,16 @@ export class DatesAvailableComponent {
     private getDoctorById: GetDoctorByIdService,
     private snackbar: MatSnackBar,
     private formBuilder: FormBuilder,
+    public dialog: MatDialog,
     private getDatesAvailablesService: GetDatesAvailablesService,
+    private createDatesAvailablesService: CreateDateAvailableService,
+    private deleteDatesAvailablesService: DeleteDateAvailableService,
   ) {
     this.form = formBuilder.group({
       specialty: [""],
       name: [""],
-      date: [""],
-      hours: [""],
+      date: ["", [Validators.required]],
+      hours: ["", [Validators.required]],
     });
     this.getDoctor();
     this.getDatesAvailables();
@@ -107,19 +119,83 @@ export class DatesAvailableComponent {
           datesAvailables.push({
             date: item.date,
             actions: {
-              name: "edit_calendar",
+              name: "schedule",
               hours: item.hour,
+              date: item.date,
+            },
+            delete: {
+              id: item._id,
             },
           });
         });
 
         this.dataTable = new MatTableDataSource(datesAvailables);
+        this.message(datesAvailables.length + " datas disponiveis");
       },
       error: (e) => {
         this.message(e.error.message);
         this.loading = false;
       },
       complete: () => {
+        this.loading = false;
+      },
+    });
+  }
+
+  valuesAction(event: any) {
+    this.dialog.open(HoursAvailablesComponent, {
+      width: "650px",
+      autoFocus: false,
+      disableClose: true,
+      data: {
+        event,
+      },
+    });
+  }
+
+  disabledButton() {
+    if (this.form.invalid || this.hours.length === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  createDateAvailable() {
+    let body: FilterDateAvailableModel;
+    let date = moment(this.form.value.date).format("DD/MM/YYYY");
+    console.log(date);
+    body = {
+      doctorId: this.data.doctorId,
+      date: date,
+      hour: this.hours,
+    };
+    this.loading = true;
+    this.createDatesAvailablesService.execute(body).subscribe({
+      next: () => {
+        this.getDatesAvailables();
+      },
+      error: (e) => {
+        this.message(e.error.message);
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
+  }
+
+  deleteDateAvailable(event: any) {
+    this.loading = true;
+    this.deleteDatesAvailablesService.execute(event.id).subscribe({
+      next: () => {
+        this.getDatesAvailables();
+      },
+      error: (e) => {
+        this.message(e.error.message);
+        this.loading = false;
+      },
+      complete: () => {
+        this.message("deletado com suceso");
         this.loading = false;
       },
     });

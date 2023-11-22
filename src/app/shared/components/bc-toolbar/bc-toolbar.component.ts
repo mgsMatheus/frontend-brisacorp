@@ -17,6 +17,10 @@ export class BcToolbarComponent {
     private authTokenService: AuthTokenService,
   ) {}
 
+  toRedirectPatients() {
+    this.router.navigate(["patients"]);
+  }
+
   toRedirect() {
     this.router.navigate(["login"]);
   }

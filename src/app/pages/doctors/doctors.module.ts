@@ -26,11 +26,17 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from "@angular/material-moment-adapter";
 import { BcInputsDirectiveModule } from "../../shared/directives/bc-inputs-directive/bc-inputs-directive.module";
-import { MatChipInputEvent, MatChipsModule } from "@angular/material/chips";
+import { MatChipsModule } from "@angular/material/chips";
 import { MatIconModule } from "@angular/material/icon";
+import { HoursAvailablesComponent } from "./dates-available/hours-availables/hours-availables.component";
 
 @NgModule({
-  declarations: [DoctorsComponent, DatesAvailableComponent, DoctorComponent],
+  declarations: [
+    DoctorsComponent,
+    DatesAvailableComponent,
+    DoctorComponent,
+    HoursAvailablesComponent,
+  ],
   imports: [
     CommonModule,
     DoctorsRoutingModule,
@@ -50,7 +56,12 @@ import { MatIconModule } from "@angular/material/icon";
     MatChipsModule,
     MatIconModule,
   ],
-  exports: [DoctorsComponent, DatesAvailableComponent, DoctorComponent],
+  exports: [
+    DoctorsComponent,
+    DatesAvailableComponent,
+    DoctorComponent,
+    HoursAvailablesComponent,
+  ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: "pt-BR" },
     {
