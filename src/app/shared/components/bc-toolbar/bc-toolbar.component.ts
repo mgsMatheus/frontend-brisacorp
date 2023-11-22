@@ -18,7 +18,7 @@ export class BcToolbarComponent {
   ) {}
 
   toRedirectPatients() {
-    this.router.navigate(["patients"]);
+    this.router.navigate(["schedule-consult"]);
   }
 
   toRedirect() {

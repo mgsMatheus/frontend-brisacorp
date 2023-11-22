@@ -5,6 +5,11 @@ import { DoctorModel, DoctorsModel } from "../../models/hospitals/doctor.model";
 import { FilterDoctorModel } from "../../models/hospitals/filter-doctor.model";
 import { DateAvailableModel } from "../../models/hospitals/date-available.model";
 import { FilterDateAvailableModel } from "../../models/hospitals/filter-date-available.model";
+import {
+  SpecialistModel,
+  SpecialistsModel,
+} from "../../models/hospitals/specialist.model";
+import { DatesAvailablesBySpecialtyModel } from "../../models/hospitals/dates-availables.model";
 
 @Injectable()
 export class HospitalDataRespository extends HospitalRepository {
@@ -40,5 +45,16 @@ export class HospitalDataRespository extends HospitalRepository {
 
   public deleteDateAvailable(id: string) {
     return this.http.delete<DateAvailableModel>("/datesAvailables/" + id);
+  }
+
+  public getSpecialist() {
+    return this.http.get<SpecialistsModel[]>("/hospitals/specialty");
+  }
+
+  public getDatesBySpecialist(specialty: SpecialistModel) {
+    return this.http.get<DatesAvailablesBySpecialtyModel[]>(
+      "/hospitals/dates-specialty",
+      { params: specialty as any },
+    );
   }
 }

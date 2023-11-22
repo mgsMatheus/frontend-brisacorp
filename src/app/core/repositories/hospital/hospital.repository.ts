@@ -3,6 +3,11 @@ import { Observable } from "rxjs";
 import { FilterDoctorModel } from "../../models/hospitals/filter-doctor.model";
 import { DateAvailableModel } from "../../models/hospitals/date-available.model";
 import { FilterDateAvailableModel } from "../../models/hospitals/filter-date-available.model";
+import {
+  SpecialistModel,
+  SpecialistsModel,
+} from "../../models/hospitals/specialist.model";
+import { DatesAvailablesBySpecialtyModel } from "../../models/hospitals/dates-availables.model";
 export abstract class HospitalRepository {
   abstract getDoctors(
     hospitalId: string,
@@ -23,4 +28,10 @@ export abstract class HospitalRepository {
   ): Observable<DateAvailableModel>;
 
   abstract deleteDateAvailable(id: string): Observable<DateAvailableModel>;
+
+  abstract getSpecialist(): Observable<SpecialistsModel[]>;
+
+  abstract getDatesBySpecialist(
+    specialty: SpecialistModel,
+  ): Observable<DatesAvailablesBySpecialtyModel[]>;
 }

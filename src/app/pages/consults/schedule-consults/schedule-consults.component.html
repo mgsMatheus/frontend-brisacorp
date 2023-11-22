@@ -3,15 +3,30 @@
 <div class="patients">
   <div class="filters">
     <form [formGroup]="form" class="form">
-      <mat-form-field class="input">
-        <mat-label>Especialidade</mat-label>
-        <mat-select formControlName="specialty">
-          <mat-option>Nenhum</mat-option>
-          @for (food of foods; track food) {
-          <mat-option [value]="food">{{ food }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+      <div>
+        <mat-form-field class="input">
+          <mat-label>Especialidade</mat-label>
+          <mat-select
+            formControlName="specialty"
+            (selectionChange)="somethingChanged()">
+            <mat-option>Nenhum</mat-option>
+            @for (specialty of specialties; track specialty) {
+            <mat-option [value]="specialty">{{ specialty }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="input">
+          <mat-label>Datas disponiveis</mat-label>
+          <mat-select formControlName="dates">
+            <mat-option>Nenhum</mat-option>
+            @for (date of datesAvailables; track date) {
+            <mat-option [value]="date">{{ date }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
     </form>
   </div>
 </div>
+
+<bc-loading [loading]="loading"></bc-loading>
