@@ -163,7 +163,6 @@ export class DatesAvailableComponent {
   createDateAvailable() {
     let body: FilterDateAvailableModel;
     let date = moment(this.form.value.date).format("DD/MM/YYYY");
-    console.log(date);
     body = {
       doctorId: this.data.doctorId,
       date: date,

@@ -7,4 +7,5 @@ export interface DoctorsModel {
   _id?: string;
   name: string;
   specialty: string;
+  active?: string;
 }

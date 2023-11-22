@@ -39,10 +39,24 @@
     </form>
   </div>
   <div class="filters">
-    <button class="button" mat-button mat-raised-button color="primary">
+    <button
+      class="button"
+      [disabled]="form.invalid"
+      mat-button
+      mat-raised-button
+      (click)="getDoctorAvailable()"
+      color="primary">
       Buscar
     </button>
   </div>
+  @if(dataTable !== undefined){
+  <div class="table">
+    <bc-table
+      [columns]="columns"
+      [data]="dataTable"
+      (valuesActions)="getDateAvailableId($event)"></bc-table>
+  </div>
+  }
 </div>
 
 <bc-loading [loading]="loading"></bc-loading>

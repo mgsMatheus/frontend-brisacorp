@@ -9,6 +9,7 @@ import {
 } from "../../models/hospitals/specialist.model";
 import { DatesAvailablesBySpecialtyModel } from "../../models/hospitals/dates-availables.model";
 import { FilterHourAvailableModel } from "../../models/hospitals/filter-hour-available.model";
+import { DoctorsAvailableModel } from "../../models/hospitals/doctors-availables.model";
 export abstract class HospitalRepository {
   abstract getDoctors(
     hospitalId: string,
@@ -39,4 +40,8 @@ export abstract class HospitalRepository {
   abstract getHourAvailable(
     filter: FilterHourAvailableModel,
   ): Observable<DatesAvailablesBySpecialtyModel[]>;
+
+  abstract getDoctorsAvailable(
+    filter: FilterHourAvailableModel,
+  ): Observable<DoctorsAvailableModel[]>;
 }
