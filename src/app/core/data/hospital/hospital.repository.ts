@@ -12,6 +12,7 @@ import {
 import { DatesAvailablesBySpecialtyModel } from "../../models/hospitals/dates-availables.model";
 import { FilterHourAvailableModel } from "../../models/hospitals/filter-hour-available.model";
 import { DoctorsAvailableModel } from "../../models/hospitals/doctors-availables.model";
+import { StatusDateAvailableModel } from "../../models/hospitals/status-date-available.model";
 
 @Injectable()
 export class HospitalDataRespository extends HospitalRepository {
@@ -70,6 +71,16 @@ export class HospitalDataRespository extends HospitalRepository {
     return this.http.get<DoctorsAvailableModel[]>(
       "/datesAvailables/doctors-available",
       { params: filter as any },
+    );
+  }
+
+  public updateStatusDateAvailables(
+    id: string,
+    body: StatusDateAvailableModel,
+  ) {
+    return this.http.patch<DoctorsAvailableModel>(
+      "/datesAvailables/" + id,
+      body,
     );
   }
 }

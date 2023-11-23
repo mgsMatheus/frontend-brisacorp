@@ -12,9 +12,10 @@ import { MatInputModule } from "@angular/material/input";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSelectModule } from "@angular/material/select";
 import { BcTableModule } from "../../../shared/components/bc-table/bc-table.module";
+import { ConfirmScheduleComponent } from "./confirm-schedule/confirm-schedule.component";
 
 @NgModule({
-  declarations: [ScheduleConsultsComponent],
+  declarations: [ScheduleConsultsComponent, ConfirmScheduleComponent],
   imports: [
     CommonModule,
     ScheduleConsultsRoutingModule,
@@ -30,6 +31,6 @@ import { BcTableModule } from "../../../shared/components/bc-table/bc-table.modu
     MatSelectModule,
     BcTableModule,
   ],
-  exports: [ScheduleConsultsComponent],
+  exports: [ScheduleConsultsComponent, ConfirmScheduleComponent],
 })
 export class ScheduleConsultsModule {}

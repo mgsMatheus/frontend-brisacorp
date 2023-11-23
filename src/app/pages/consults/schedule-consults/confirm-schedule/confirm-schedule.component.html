@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Confirme seu Agendamento</h2>
+<mat-dialog-content class="mat-typography">
+  desejar confirma seu agendamento para o dia <b>{{ data.event.date }}</b
+  >, com o profissional
+  <b>{{ data.event.nameDoctor }}({{ data.event.specialty }})</b> no hospital
+  <b>{{ data.event.nameHospital }}</b
+  >?
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close mat-stroked-button color="primary">
+    Cancelar
+  </button>
+  <button
+    mat-button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="true"
+    (click)="updateStatus()">
+    Confirmar
+  </button>
+</mat-dialog-actions>
+
+<bc-loading [loading]="loading"></bc-loading>

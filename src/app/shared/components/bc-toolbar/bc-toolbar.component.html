@@ -8,9 +8,9 @@
           <div class="menu">
             <button
               mat-button
+              [matMenuTriggerFor]="consult"
               class="button"
-              color="primary"
-              (click)="toRedirectPatients()">
+              color="primary">
               Consulta
             </button>
           </div>
@@ -57,3 +57,14 @@
     </div>
   </mat-toolbar>
 </div>
+
+<mat-menu #consult="matMenu">
+  <button mat-menu-item (click)="schedule()">
+    <mat-icon class="icon material-icons-outlined">schedule</mat-icon>
+    <span>Agendar</span>
+  </button>
+  <button mat-menu-item (click)="consults()">
+    <mat-icon class="icon material-icons-outlined">event_available</mat-icon>
+    <span>Proximas consultas</span>
+  </button>
+</mat-menu>

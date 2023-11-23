@@ -11,6 +11,8 @@ import { GetDoctorsAvailableService } from "../../../core/service/hospital/get-d
 import { DateAvailableModel } from "../../../core/models/hospitals/date-available.model";
 import { MatTableDataSource } from "@angular/material/table";
 import { DoctorsAvailableModel } from "../../../core/models/hospitals/doctors-availables.model";
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmScheduleComponent } from "./confirm-schedule/confirm-schedule.component";
 
 @Component({
   selector: "schedule-consults",
@@ -48,6 +50,7 @@ export class ScheduleConsultsComponent implements OnInit {
     private getHourAvailableService: GetHourAvailableService,
     private getDoctorsAvailableService: GetDoctorsAvailableService,
     private snackbar: MatSnackBar,
+    public dialog: MatDialog,
   ) {
     this.form = formBuilder.group({
       specialty: ["", [Validators.required]],
@@ -100,6 +103,7 @@ export class ScheduleConsultsComponent implements OnInit {
   }
 
   getDatesBySpecialty() {
+    this.loading = true;
     const specialty: SpecialistModel = {
       specialty: this.form.value.specialty,
     };
@@ -122,6 +126,7 @@ export class ScheduleConsultsComponent implements OnInit {
   }
 
   getHourAvailable() {
+    this.loading = true;
     const filter: FilterHourAvailableModel = {
       specialty: this.form.value.specialty,
       date: this.form.value.dates,
@@ -165,6 +170,10 @@ export class ScheduleConsultsComponent implements OnInit {
                   actions: {
                     name: "schedule",
                     id: item._id,
+                    nameDoctor: doctor.name,
+                    nameHospital: hospital.name,
+                    date: item.date,
+                    specialty: doctor.specialty,
                   },
                 });
               }
@@ -185,7 +194,25 @@ export class ScheduleConsultsComponent implements OnInit {
   }
 
   getDateAvailableId(event) {
-    console.log(event);
+    let ref = this.dialog.open(ConfirmScheduleComponent, {
+      width: "570px",
+      data: {
+        event,
+      },
+      autoFocus: false,
+      disableClose: true,
+    });
+    ref.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.form.patchValue({
+          specialty: "",
+          dates: "",
+          hour: "",
+        });
+        let table: any = [];
+        this.dataTable = new MatTableDataSource(table);
+      }
+    });
   }
 
   message(message: string) {

@@ -55,6 +55,14 @@ const routes: Routes = [
         "./pages/consults/schedule-consults/schedule-consults.module"
       ).then((m) => m.ScheduleConsultsModule),
   },
+  {
+    path: "consult",
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import("./pages/consults/consult/consult.module").then(
+        (m) => m.ConsultModule,
+      ),
+  },
 ];
 
 @NgModule({

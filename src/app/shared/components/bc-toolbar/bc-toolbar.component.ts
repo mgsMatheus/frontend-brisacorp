@@ -17,12 +17,16 @@ export class BcToolbarComponent {
     private authTokenService: AuthTokenService,
   ) {}
 
-  toRedirectPatients() {
+  schedule() {
     this.router.navigate(["schedule-consult"]);
   }
 
   toRedirect() {
     this.router.navigate(["login"]);
+  }
+
+  consults() {
+    this.router.navigate(["consult"]);
   }
 
   logout() {
