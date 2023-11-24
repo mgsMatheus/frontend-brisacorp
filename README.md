@@ -1,27 +1,46 @@
-# LibraryBrisacorp
+# FrontEnd Brisacorp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+Este é um projeto Angular incrível que utiliza Node.js como backend. Aqui estão os passos para configurar e executar o projeto em sua máquina local.
 
-## Development server
+## Pré-requisitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Certifique-se de ter as seguintes ferramentas instaladas em sua máquina antes de começar:
 
-## Code scaffolding
+- [Node.js](https://nodejs.org/en/download/current) - Versão utilizada: v18.18.2
+- Angular CLI - Instale globalmente com o seguinte comando:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    ```bash
+    npm install -g @angular/cli@17.0.0
+    ```
 
-## Build
+## Configuração do Ambiente
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone o repositório:
 
-## Running unit tests
+    ```bash
+    git clone https://github.com/seu-usuario/seu-projeto-angular.git
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Abra o projeto no terminal:
 
-## Running end-to-end tests
+    ```bash
+    cd seu-projeto-angular
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. Instale as dependências do projeto:
 
-## Further help
+    ```bash
+    npm install
+    ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Executando o Projeto
+
+1. Após a instalação das dependências, inicie o servidor de desenvolvimento:
+
+    ```bash
+    npm run start
+    ```
+
+2. O projeto estará rodando em:
+
+    [http://localhost:4200/](http://localhost:4200/)
